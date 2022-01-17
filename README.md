@@ -1,6 +1,6 @@
 # CTE – Common Table Expressions
 
-  CTE – Common Table Expressions; Kısaca, birden çok zincirleme SQL sorgusunu tek bir sorguya indirmeyi ve veritabanına bir kez gitmemize olanak sağlayan SQL kavramıdır. ABAP 7.51 sürümü ile hayatıza girmiştir.
+  CTE – Common Table Expressions; Kısaca, birden çok zincirleme SQL sorgusunu tek bir sorguya indirmeyi ve veritabanına bir kez gitmemize olanak sağlayan SQL kavramıdır. ABAP 7.51 sürümü ile hayatımıza girmiştir.
 
   CTE "WITH" yan tümcesi ile başlar. WITH yapısı, tek bir SQL ifadesinde birleştirilmiş alt sorgular oluşturmanıza ve ortak bir sonuç oluşturmak için bu alt sorguların tablo sonuçlarını kullanmamıza olanak sağlar. CTE için herhangi bir sınırlama yoktur, birden fazla sorgu tek bir CTE içerisinde çağrılabilir. Her sorgunun sonucu "+" ifadesi içinde saklanır ve bu daha sonra CTE-nin daha ileri bir bölümünde internal table(FOR ALL ENTRIES) gibi kullanılabilir.
 
