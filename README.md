@@ -170,7 +170,16 @@ START-OF-SELECTION.
      im_basedat = app->run_cte_dat( ) ).
 ```
 #### Çıktı;
+WITH yan tümcesi Üç alt sorguyu birleştiriyoruz;
+
+* +CONN_DAT  : Seçilen havayolu için "LH" SPFLI tablosundak uçuşları içeren tablodan tüm kayıtları çekiyoruz.
+* +SEATS_DAT : Havayolu ve uçuş için uçuşta kullanılan koltukların toplamlarını çekiyoruz.
+* +RESULT_DAT: Önceki iki seçimin bir birleşimini oluşturuyoruz ve okunabilirlik için alanları yeniden adlandırıyoruz.
+
+
 ![image](https://user-images.githubusercontent.com/26427511/149832573-cf58aefc-06f6-4978-b7eb-d33aae3f6af0.png)
+
 ![image](https://user-images.githubusercontent.com/26427511/149833585-2d489423-dbaa-484f-8046-af7a5434108e.png)
+
 ![image](https://user-images.githubusercontent.com/26427511/149832179-ae3d41eb-88b7-4967-a56c-857171f44efa.png)
 
