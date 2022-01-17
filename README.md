@@ -13,7 +13,7 @@
 * Her WITH ifadesi, CTE-lerinden en az birini kullanan bir ana sorgu (SELECT..) ile bitmelidir ve her CTE, en az bir sonraki sorguda kullanılmalıdır 
 * Bir CTE kendisini veri kaynağı olarak kullanamaz. WITH, bağımsız bir ifade olarak veya OPEN CURSOR'a ek olarak kullanılabilir.
 
-### Genel Sözdizimi
+### CTE Kullanımı
 ```abap
 WITH 
   +cte1[( name1, name2, ... )] AS ( SELECT subquery_clauses [UNION ...] ), 
