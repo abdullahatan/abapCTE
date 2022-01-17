@@ -94,6 +94,8 @@ START-OF-SELECTION.
     EXPORTING
      im_basedat = app->run_cte_dat( ) ).
 ```
+[Go to code](sourceCode/ZAATAN_CTE01.abap)
+
 #### Çıktı;
 İlk olarak SPFLI ile SCARR tablolarını birleştirdik. CARRID = 'LH' koşulumza uygun kayıtları çektik ve +SPFLI yan tümcesi ile bu verileri şeffaf bir tabloya yazdık, ardından ikinci sorgu ile yukarıdaki sorgudan(+SPFLI) dönen toplam kayıt sayısını bularak bunuda +SIZE yan tümcesi ile şeffaf bir tabloya daha yazdık. Son olarak artık zorunlu olan ana sorgumuzu oluşturduk. Ana sorgumuz + yan tümcesi ile değil direk Select... ifadesi ile başlattık ve yukarıda oluşturduğumuz şeffaf tabloları Cross Join yan tümcesi ile birleştirek verileri listelemiş olduk.
 
@@ -169,6 +171,8 @@ START-OF-SELECTION.
     EXPORTING
      im_basedat = app->run_cte_dat( ) ).
 ```
+[Go to code](sourceCode/ZAATAN_CTE02.abap)
+
 #### Çıktı;
 WITH yan tümcesi Üç alt sorguyu birleştiriyoruz;
 
@@ -241,6 +245,8 @@ START-OF-SELECTION.
     EXPORTING
      im_basedat = app->run_cte_dat( ) ).
 ```
+[Go to code](sourceCode/ZAATAN_CTE03.abap)
+
 #### Çıktı;
 Bu sorguda, "City From" ve "City To" alanları bir tabloda benzersiz şehirleri bulmak için iki alt sorgunun birleşimi olarak CTE şehirleri oluşturduk.
 Koddan da görebileceğiniz gibi, ana SELECT, ana veri kaynağı olarak CTE-yi kullanmak zorunda değildir, bu örnekte bir alt sorgu olarak kullanılmıştır.
@@ -310,6 +316,8 @@ START-OF-SELECTION.
     EXPORTING
      im_basedat = app->run_cte_dat( ) ).
 ```
+[Go to code](sourceCode/ZAATAN_CTE04.abap)
+
 #### Çıktı;
 CTE sorguları kullanarak özet satırlar oluşturabiliriz.
 
@@ -381,6 +389,8 @@ ENDCLASS.
 START-OF-SELECTION.
   NEW cte_demo( )->run_performance( ).
 ```
+[Go to code](sourceCode/ZAATAN_CTE05.abap)
+
 #### Çıktı;
 ![image](https://user-images.githubusercontent.com/26427511/149839517-c5308b8b-16c9-40a9-ba0e-632e68964d8b.png)
 
