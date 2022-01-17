@@ -2,7 +2,7 @@
 
   CTE – Common Table Expressions; Kısaca, birden çok zincirleme SQL sorgusunu tek bir sorguya indirmenin ve Veritabanına bir kez gitmemize olanak sağlayan SQL kavramıdır. ABAP 7.51 sürümü ile hayatıza girmiştir.
 
-  CTE "WITH" yan tümcesi ile başlar. WITH yapısı, tek bir SQL ifadesinde birleştirilmiş alt sorgular oluşturmanıza ve ortak bir sonuç oluşturmak için bu alt sorguların tablo sonuçlarını kullanmanıza olanak sağlar. CTE için herhangi bir sınırlama yoktur, birden fazla sorgu tek bir CTE içerisinde çağrılabilir. Her sorgunun sonucu "+" ifadesi içinde saklanır ve bu daha sonra CTE-nin daha ileri bir bölümünde internal tabloymuş(FOR ALL ENTRIES) gibi kullanılabilir.
+  CTE "WITH" yan tümcesi ile başlar. WITH yapısı, tek bir SQL ifadesinde birleştirilmiş alt sorgular oluşturmanıza ve ortak bir sonuç oluşturmak için bu alt sorguların tablo sonuçlarını kullanmamıza olanak sağlar. CTE için herhangi bir sınırlama yoktur, birden fazla sorgu tek bir CTE içerisinde çağrılabilir. Her sorgunun sonucu "+" ifadesi içinde saklanır ve bu daha sonra CTE-nin daha ileri bir bölümünde internal tabloymuş(FOR ALL ENTRIES) gibi kullanılabilir.
 
 ### CTE Özellikleri
 * Her sorgu parçası adı (+ ifadesinden sonraki kısım) benzersiz olmalıdır
@@ -314,3 +314,76 @@ START-OF-SELECTION.
 CTE sorguları kullanarak özet satırlar oluşturabiliriz.
 
 ![image](https://user-images.githubusercontent.com/26427511/149837343-c14d59a2-b737-443b-a0b2-ff3354505976.png)
+
+
+### CTE Performans
+  CTE sorguları tamamen DBMS(Database Management Systems) düzeyinde yürütüldüğü göz önüne alırsak, hızı olarak FOR ALL ENTRIES (Sistem HANA olsa bile) daha yüksek bir verimliliğe sahiptir. Doğrulamak için aşağıdaki örneği inceleyelim.
+ 
+ 
+ 
+```abap
+*&---------------------------------------------------------------------*
+*& Program ZAATAN_CTE
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+PROGRAM zaatan_cte.
+
+CLASS cte_demo DEFINITION.
+  PUBLIC SECTION.
+    METHODS:
+      run_performance.
+ENDCLASS.
+CLASS cte_demo IMPLEMENTATION.
+  METHOD run_performance.
+
+    DATA: _start_time TYPE timestampl,
+          _end_time   TYPE timestampl,
+          _difference TYPE timestampl.
+
+    CLEAR: _start_time, _end_time, _difference.
+    GET TIME STAMP FIELD _start_time.
+    WITH
+      +conn_dat AS (
+        SELECT spfli~carrid, carrname, connid, cityfrom, cityto
+               FROM spfli
+               INNER JOIN scarr
+                 ON scarr~carrid = spfli~carrid )
+        SELECT * FROM sflight INNER JOIN +conn_dat AS c ON c~carrid = sflight~carrid AND
+                                                           c~connid = sflight~connid
+        INTO TABLE @DATA(lt_cte_dat).
+    GET TIME STAMP FIELD _end_time.
+
+    _difference = _end_time - _start_time.
+    WRITE: /(50) 'CTE Speed: ', _difference.
+
+
+    CLEAR: _start_time, _end_time, _difference.
+    GET TIME STAMP FIELD _start_time.
+    SELECT spfli~carrid, carrname, connid, cityfrom, cityto
+           FROM spfli
+           INNER JOIN scarr
+             ON scarr~carrid = spfli~carrid
+           INTO TABLE @DATA(lt_spflidat).
+
+    SELECT * FROM sflight
+        FOR ALL ENTRIES IN @lt_spflidat
+            WHERE sflight~carrid = @lt_spflidat-carrid AND
+                  sflight~connid = @lt_spflidat-connid
+    INTO TABLE @DATA(lt_fae_dat).
+    GET TIME STAMP FIELD _end_time.
+
+    _difference = _end_time - _start_time.
+    WRITE: /(50) 'FAE Speed: ', _difference.
+  ENDMETHOD.
+ENDCLASS.
+
+START-OF-SELECTION.
+  NEW cte_demo( )->run_performance( ).
+```
+#### Çıktı;
+![image](https://user-images.githubusercontent.com/26427511/149839517-c5308b8b-16c9-40a9-ba0e-632e68964d8b.png)
+
+
+
+
