@@ -32,7 +32,7 @@ WITH
 [ENDWITH].
 ```
 
-### Örnek CTE Sorguları;
+### CTE Örnekleri
 
 ```abap
 *&---------------------------------------------------------------------*
@@ -95,8 +95,11 @@ START-OF-SELECTION.
      im_basedat = app->run_cte_dat( ) ).
 ```
 #### Çıktı;
-![image](https://user-images.githubusercontent.com/26427511/149826156-2a9802bc-1629-480f-bb02-174709be6cf0.png)
-![image](https://user-images.githubusercontent.com/26427511/149826188-23bb8b9e-214e-4e85-999f-4f03f451c92a.png)
+İlk olarak SPFLI ile SCARR tablolarını birleştirdik. CARRID = 'LH' koşulumza uygun kayıtları çektik ve +SPFLI yan tümcesi ile bu verileri şeffaf bir tabloya yazdık, ardından ikinci sorgu ile yukarıdaki sorgudan(+SPFLI) dönen toplam kayıt sayısını bularak bunuda +SIZE yan tümcesi ile şeffaf bir tabloya daha yazdık. Son olarak artık zorunlu olan ana sorgumuzu oluşturduk. Ana sorgumuz + yan tümcesi ile değil direk Select... ifadesi ile başlattık ve yukarıda oluşturduğumuz şeffaf tabloları Cross Join yan tümcesi ile birleştirek verileri listelemiş olduk.
+
+![image](https://user-images.githubusercontent.com/26427511/149826504-48ee6129-c99f-4e9e-9b60-e976a1b485f0.png)
+
+
 
 
 
