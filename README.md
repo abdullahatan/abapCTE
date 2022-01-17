@@ -174,7 +174,7 @@ START-OF-SELECTION.
 [Go to code](sourceCode/ZAATAN_CTE02.abap)
 
 #### Çıktı;
-WITH yan tümcesi Üç alt sorguyu birleştiriyoruz;
+WITH yan tümcesi üç alt sorguyu birleştiriyoruz;
 
 * +CONN_DAT  : Seçilen havayolu için "LH" SPFLI tablosundak uçuşları içeren tablodan tüm kayıtları çekiyoruz.
 * +SEATS_DAT : Havayolu ve uçuş için uçuşta kullanılan koltukların toplamlarını çekiyoruz.
