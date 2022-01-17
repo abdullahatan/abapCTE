@@ -311,6 +311,6 @@ START-OF-SELECTION.
      im_basedat = app->run_cte_dat( ) ).
 ```
 #### Çıktı;
-WITH yapısı kullanarak özet satırlar oluşturabiliriz.
+CTE sorguları kullanarak özet satırlar oluşturabiliriz.
 
 ![image](https://user-images.githubusercontent.com/26427511/149837343-c14d59a2-b737-443b-a0b2-ff3354505976.png)
